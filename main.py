@@ -7,6 +7,12 @@ class player:
         self.role = role
         self.franchise = franchise
         self.credits = credits
+
+     def __str__(self):
+        return f"{self.name} ({self.franchise}, {self.role}, {self.credits} cr)"
+ 
+
+
 babar = player("P089", "Babar Azam", "Peshawar Zalmi", "BAT", 10.5)
  
 print(babar.name)
