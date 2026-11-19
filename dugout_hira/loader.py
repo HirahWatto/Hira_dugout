@@ -1,6 +1,6 @@
 import csv
 
-from dugout_hira.models import Player, FantasyTeam
+from dugout_hira .models import Player, FantasyTeam
 
 def load_player(path):
 
