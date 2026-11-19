@@ -45,28 +45,76 @@ class FantasyTeam:
         cost = self.total_credits()
         return f"{self.team_name} (owner: {self.owner}, {size} players, {cost} cr)"
 
-team = FantasyTeam("Dugout Demo XI", "Hirah")   
-babar = player("P089", "Babar Azam", "Peshawar Zalmi", "BAT", 10.5)
-Asif_Ali  = player("P055","Asif Ali","Batter","Lahore Qalandars",6.0)
-Saqib_Khan = player("P120","Saqib Khan","Bowller", "Multan Sultans",7.5)
-Iftikhar_Ahmed = player("P094","Iftikhar Ahmed","All Rounder", "Peshawar Zalmi", 7.5)
-Ali_Raza = player("P096","Ali Raza", "Bowller", "Peshawar Zalmi", 8.5)
-Saad_Baig = player("P036","Saas Baig","WK","Hyderabad Kingsmen", 6.0)
-Mohammad_Faiq = player("P023","Mohammad Faiq","Batter","Islamabad United",7.5)
-CJ_Green = player("P026", "CJ Green", "All Rounder", "Islamabad United",7.5)
-Usama_Mir = player("P070","Usama Mir", "Bowller", "Lahore Qalandars",9.5)
-BR_Hampton = player("P116","BR Hampton","Bowller", "Multan Sultans", 7.5)
-Shahzaib_Khan = player("P127","Shahzaib Khan","Batter","Rawalpindiz", 7.5)
+team = FantasyTeam("Dugout Demo XI", "Hirah")
+
+babar = player("P089", "Babar Azam", "BAT", "Peshawar Zalmi", 10.5)
+Asif_Ali = player("P055", "Asif Ali", "BAT", "Lahore Qalandars", 6.0)
+Saqib_Khan = player("P120", "Saqib Khan", "BOWL", "Multan Sultans", 7.5)
+Iftikhar_Ahmed = player("P094", "Iftikhar Ahmed", "AR", "Peshawar Zalmi", 7.5)
+Ali_Raza = player("P096", "Ali Raza", "BOWL", "Peshawar Zalmi", 8.5)
+Saad_Baig = player("P036", "Saad Baig", "WK", "Hyderabad Kingsmen", 6.0)
+Mohammad_Faiq = player("P023", "Mohammad Faiq", "BAT", "Islamabad United", 7.5)
+CJ_Green = player("P026", "CJ Green", "AR", "Islamabad United", 7.5)
+Usama_Mir = player("P070", "Usama Mir", "BOWL", "Lahore Qalandars", 9.5)
+BR_Hampton = player("P116", "BR Hampton", "BOWL", "Multan Sultans", 7.5)
+Shahzaib_Khan = player("P127", "Shahzaib Khan", "BAT", "Rawalpindiz", 7.5)
+
+team_players = [
+    babar,
+    Asif_Ali,
+    Saqib_Khan,
+    Iftikhar_Ahmed,
+    Ali_Raza,
+    Saad_Baig,
+    Mohammad_Faiq,
+    CJ_Green,
+    Usama_Mir,
+    BR_Hampton,
+    Shahzaib_Khan,
+]
+
+for selected_player in team_players:
+    team.add_player(selected_player)
+
+team.set_captain(babar, Asif_Ali)
 
 
+def show_pool(players):
+    """Print how many players there are per franchise and per role."""
+    by_franchise = {}
+    by_role = {}
 
-for player in [babar, Asif_Ali, Saqib_Khan, Iftikhar_Ahmed, Ali_Raza, Saad_Baig, Mohammad_Faiq, CJ_Green, Usama_Mir, BR_Hampton, Shahzaib_Khan]:
-    team.set_captain(babar, Asif_Ali)
+    for pool_player in players:
+        by_franchise[pool_player.franchise] = by_franchise.get(pool_player.franchise, 0) + 1
+        by_role[pool_player.role] = by_role.get(pool_player.role, 0) + 1
 
-print(team)
-print("Roles:", team.count_by_role())
-print("Captain:", team.captain)
-print("Vice-captain:", team.vice_captain)
+    print("Players by franchise:")
+    for franchise in sorted(by_franchise):
+        print(f"  {franchise}: {by_franchise[franchise]}")
+
+    print("Players by role:")
+    for role in sorted(by_role):
+        print(f"  {role}: {by_role[role]}")
+
+
+def show_team(fantasy_team):
+    """Print a team's players, cost and captains."""
+    print(f"\nTeam {fantasy_team.team_name} by {fantasy_team.owner}:")
+    for team_player in fantasy_team.players:
+        print(f"  {team_player}")
+    print(f"Total credits: {fantasy_team.total_credits()}")
+    print(f"Captain: {fantasy_team.captain.name}, Vice-captain: {fantasy_team.vice_captain.name}")
+
+
+def main():
+    show_pool(team_players)
+    show_team(team)
+    print("Roles:", team.count_by_role())
+
+
+if __name__ == "__main__":
+    main()
+
 
 
 
